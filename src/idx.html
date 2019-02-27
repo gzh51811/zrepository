@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-        <link rel="stylesheet" href="bootstrap-4.0.0/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/bootstrap-4.0.0/dist/css/bootstrap.css">
         <style type="text/css">
             html, body {background: #ccc; height: 100%;}
             body {background: url(img/background.jpg) center; background-size: cover;}
@@ -24,10 +24,38 @@
                 <label for="exampleInputPassword1">密码: </label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
             </div>
-            <button type="submit" class="btn btn-primary">登录</button>
+            <button type="submit" class="btn btn-primary" id="btn">登录</button>
         </div>
     </body>
     <script type="text/javascript">
-        
+        (() => {
+            let username = document.getElementById('exampleInputEmail1');
+            let password = document.getElementById('exampleInputPassword1');
+            let oBtn = document.getElementById('btn');
+
+            oBtn.onclick = () => {
+                let val1 = username.value;
+                let val2 = password.value;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('post', '/login', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                // xhr.onreadystatechange = () => {
+                //     if(xhr.readyState == 4) {
+                //         if(xhr.status == 200) {
+                //             let str = xhr.responseText;
+                //             console.log(str);
+                //         }
+                //     }
+                // }
+                xhr.onload = () => {
+                    if(xhr.status == 200) {
+                        let str = xhr.responseText;
+                        console.log(str);
+                    }
+                }
+                xhr.send(`username=${val1}&password=${val2}`);
+            }
+        })()
     </script>
 </html>
