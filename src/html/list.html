@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>商品列表</title>
+  <link rel="stylesheet" href="../assets/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">二狗子后台管理系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          admin
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退了</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">商品管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">商品列表</a></dd>
+            <dd><a href="javascript:;">商品分类</a></dd>
+            <dd><a href="javascript:;">添加商品</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">用户信息</a></dd>
+            <dd><a href="javascript:;">用户管理</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">订单管理</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">订单管理</a></dd>
+               
+              </dl>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <table class="layui-hide" id="goodslist" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+              
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
+ 
+         
+    
+    </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © 二狗子后台管理系统
+  </div>
+</div>
+<script src="../assets/layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+    var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+  
+  //监听导航点击
+  element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+
+  });
+});
+layui.use('table', function(){
+  var table = layui.table;
+  
+  //第一个实例
+  table.render({
+    elem: '#goodslist'
+    ,url:'/test/table/demo1.json'
+    ,title: '用户数据表'
+    ,totalRow: true
+    ,cols: [[
+      {type: 'checkbox', fixed: 'left'}
+      ,{field:'id', title:'ID', width:80, fixed: 'left', unresize: true, sort: true, totalRowText: '合计'}
+      ,{field:'username', title:'商品名称', width:120, edit: 'text'}
+      ,{field:'email', title:'分类', width:150, edit: 'text', templet: function(res){
+        return '<em>'+ res.email +'</em>'
+      }}
+      ,{field:'experience', title:'积分', width:80, sort: true, totalRow: true}
+      ,{field:'sex', title:'性别', width:80, edit: 'text', sort: true}
+      ,{field:'logins', title:'登入次数', width:100, sort: true, totalRow: true}
+      ,{field:'sign', title:'签名'}
+      ,{field:'city', title:'城市', width:100}
+      ,{field:'ip', title:'IP', width:120}
+      ,{field:'joinTime', title:'加入时间', width:120}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]]
+    ,page: true
+  });
+
+});
+</script>
+</body>
+</html>
