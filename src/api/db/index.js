@@ -31,5 +31,25 @@ exports.find = async (colName, data) => {
     client.close();
 
     return res;
+}
 
+exports.delete = async (colName, data) => {
+    let {client, db} = await connect();
+    let collection = db.collection(colName);
+
+    let res = await collection.deleteMany(data)
+
+    client.close();
+
+    return res;
+}
+
+
+exports.update = async (colName, data, newData) => {
+    let {client, db} = await connect();
+    let collection = db.collection(colName);
+    let res = await collection.updateMany(data, newData);
+    client.close();
+
+    return res;
 }

@@ -10,6 +10,7 @@ const router = new Router();
 // const db = require('../db');
 
 const loginRouter = require('./login');
+const userRouter = require('./user');
 
 
 router.use(koaBody({
@@ -34,5 +35,6 @@ router.use(koaBody({
 
 
 router.use('/login', loginRouter.routes());
+router.use('/user', userRouter.routes());
 
 module.exports = router;

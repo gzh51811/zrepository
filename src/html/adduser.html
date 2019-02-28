@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>二狗子后台管理系统</title>
+	<link rel="stylesheet" href="../assets/bootstrap-4.0.0/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/layui/css/layui.css">
+	<style type="text/css">
+		.container {
+			width: 70%;
+			margin-left: 15%;
+		}
+
+		a:hover {
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">二狗子后台管理系统</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+						admin
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">基本资料</a></dd>
+						<dd><a href="">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">退了</a></li>
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a class="" href="javascript:;">商品管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">商品列表</a></dd>
+							<dd><a href="javascript:;">商品分类</a></dd>
+							<dd><a href="javascript:;">添加商品</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;">用户管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">用户信息</a></dd>
+							<dd><a href="javascript:;">用户管理</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;">订单管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">订单管理</a></dd>
+
+						</dl>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<div style="padding: 15px;">内容主体区域</div>
+			<div class="container">
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">用户名</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="username" placeholder="用户名">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">昵称</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="nicheng" placeholder="昵称">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword3" class="col-sm-2 col-form-label">密码</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="password" placeholder="">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputPassword3" class="col-sm-2 col-form-label">确认密码</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" id="confirmpassword" placeholder="">
+					</div>
+				</div>
+				<fieldset class="form-group">
+					<div class="row">
+						<legend class="col-form-label col-sm-2 pt-0">性别</legend>
+						<div class="col-sm-10">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+									value="男" checked>
+								<label class="form-check-label" for="gridRadios1">
+									男
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+									value="女">
+								<label class="form-check-label" for="gridRadios2">
+									女
+								</label>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">邮箱</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="email" placeholder="">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">手机</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="phone" placeholder="">
+					</div>
+				</div>
+				<!-- <div class="clear"></div> -->
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary" id="btn">添加</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			(() => {
+				let username = document.querySelector('#username');
+				let nicheng = document.querySelector('#nicheng');
+				let password = document.querySelector('#password');
+				let confirmpassword = document.querySelector('#confirmpassword');
+				let gender = document.querySelectorAll('.form-check input');
+				let email = document.querySelector('#email');
+				let phone = document.querySelector('#phone');
+				let btn = document.querySelector('#btn');
+
+				// 编辑状态
+				var search = location.search;
+				search = search.slice(1);
+				var arr = search.split('&');
+				var obj = {};
+				for(var i = 0; i < arr.length; i++) {
+					var newArr = arr[i].split('=');
+					obj[newArr[0]] = newArr[1];
+				}
+				// console.log(obj);
+
+				if(obj.type == 'edit') {
+
+					btn.innerHTML = '修改';
+
+					let xhr = new XMLHttpRequest();
+					xhr.open('post', '/user', true);
+					xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+					xhr.onload = () => {
+						if (xhr.status == 200) {
+							var str = xhr.responseText;
+							var arr = JSON.parse(str);
+							str = arr[0];
+							console.log(str);
+
+							username.value = str.username;
+							nicheng.value = str.nicheng;
+							password.value = str.password;
+							email.value = str.email;
+							phone.value = str.phone;
+							if (str.gender == '男') gender[0].checked = true;
+							if (str.gender == '女') gender[1].checked = true;
+
+							btn.onclick = () => {
+								let _username = username.value;
+								let _nicheng = nicheng.value;
+								let _password = password.value;
+								let _email = email.value;
+								let _phone = phone.value;
+
+								let _gender;
+								for (let i = 0; i < gender.length; i++) {
+									if (gender[i].checked) {
+										_gender = gender[i].value
+									}
+								}
+								// console.log(_gender);
+								let data = `username=${_username}&nicheng=${_nicheng}&password=${_password}&gender=${_gender}&email=${_email}&phone=${_phone}&_id=${str._id}&method=update`;
+
+								xhr.open('post', '/user', true);
+								xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+								xhr.onload = () => {
+									if(xhr.readyState = 200) {
+										var str1 = xhr.responseText;
+										var arr1 = JSON.parse(str1);
+										// console.log(arr1);
+										if(arr1.n) {
+											alert('修改成功');
+											location.href = './userlist.html';
+										} else {
+											alert('修改失败');
+										}
+									}
+								}
+								xhr.send(data);
+							}
+						}
+					}
+					xhr.send(`method=findall&_id=${obj.id}`);
+				} else {
+					// 添加状态
+					username.onchange = () => {
+						let _username = username.value;
+
+						let xhr = new XMLHttpRequest();
+						xhr.open('post', '/user', true);
+						xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+						xhr.onload = () => {
+							if (xhr.status == 200) {
+								let str = xhr.responseText;
+								str = JSON.parse(str);
+								// console.log(str);
+								if(str) {
+									console.log('用户名不可用');
+									btn.onclick = () => {
+										alert('....');
+									}
+								} else {
+									console.log('可以注册');
+									btn.onclick = isOkToRegister;
+								}
+							}
+						}
+						xhr.send(`method=find&username=${_username}`);
+					}
+				}
+				
+				
+				function isOkToRegister() {
+					let _username = username.value;
+					let _nicheng = nicheng.value;
+					let _password = password.value;
+					let _email = email.value;
+					let _phone = phone.value;
+
+					let _gender;
+					for (let i = 0; i < gender.length; i++) {
+						if (gender[i].checked) {
+							_gender = gender[i].value
+						}
+					}
+					// console.log(_gender);
+					let data = `username=${_username}&nicheng=${_nicheng}&password=${_password}&gender=${_gender}&email=${_email}&phone=${_phone}&method=insert`;
+
+
+					let xhr = new XMLHttpRequest();
+					xhr.open('post', '/user', true);
+					xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+					xhr.onload = () => {
+						if (xhr.status == 200) {
+							let str = xhr.responseText;
+							str = JSON.parse(str);
+							// console.log(str);
+							if(str.ok) {
+								console.log('插入成功');
+							} else {
+								console.log('插入失败');
+							}
+						}
+					}
+					xhr.send(data);
+				}
+			})()
+		</script>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			© 二狗子后台管理系统
+		</div>
+	</div>
+	<script src="../assets/layui/layui.js"></script>
+	<script>
+		//JavaScript代码区域
+		layui.use('element', function () {
+			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+			//监听导航点击
+			element.on('nav(demo)', function (elem) {
+				//console.log(elem)
+				layer.msg(elem.text());
+			});
+		});
+	</script>
+</body>
+
+</html>
