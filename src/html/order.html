@@ -5,7 +5,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>订单列表</title>
-	<link rel="stylesheet" href="../assets/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/layui/css/layui.css">
+    <style type="text/css">
+        .state {
+            width: 250px; height: 200px; border: 1px solid #ccc; background: pink; border-radius: 10px; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 999;
+        }
+
+        .state #statebtn {
+            position: absolute; right: 20px; bottom: 20px;
+        }
+
+        .state p {
+            margin: 12px 0; padding-left: 50px;
+        }
+    </style>
 </head>
 
 <body class="layui-layout-body">
@@ -71,8 +84,8 @@
 					</div>
 				</script>
 				<script type="text/html" id="barDemo">
-					<!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a> -->
 					<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+					<a class="layui-btn layui-btn-xs" lay-event="edit">订单状态</a>
 					<!-- <a class="layui-btn layui-btn-xs" id="state">上线</a> -->
 				</script>
 
@@ -105,21 +118,34 @@
 			table.render({
 				elem: '#userlist'
 				, url: '/order'
-				, toolbar: '#toolbarDemo'
+                , toolbar: '#toolbarDemo'
+                , defaultToolbar: ['']
 				, title: '用户数据表'
-				, totalRow: true
-                , page: true
+				, totalRow: false
+                , page: false
 				, cols: [[
-					  { type: 'checkbox', fixed: 'left' }
-					, { field: 'shopname', title: '名称', width: 210}
-					, { field: 'number', title: '数量', width: 100}
-					, { field: 'price', title: '价格', width: 100}
-					, { field: 'freightprice', title: '运费', width: 100}
-					, { field: 'totalprice', title: '商品总额', width: 100}
-					, { field: 'orderprice', title: '订单总额', width: 100}
-					, { field: 'ordertime', title: '下单时间', width: 180}
-					, { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
-				]]
+                      { type: 'checkbox', fixed: 'left', unresize: true, style: 'text-align: center;'}
+                    , { type: 'numbers', title: '序号', fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'shopname', title: '名称', width: 209, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'number', title: '数量', width: 80, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'price', title: '价格', width: 80, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'freightprice', title: '运费', width: 80, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'totalprice', title: '商品总额', width: 100, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'orderprice', title: '订单总额', width: 100, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'ordertime', title: '下单时间', width: 147, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { field: 'orderstate', title: '状态', width: 90, fixed: 'left', unresize: true, style: 'text-align: center;'}
+					, { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 , unresize: true}
+                ]]
+                , done: function() {
+                    let aThs = document.querySelectorAll('.layui-table-box .layui-table-header th');
+
+                    for(var i = 0; i < aThs.length; i++) {
+                        // console.log(aThs[i]);
+                        aThs[i].style.textAlign = 'center';
+                    }
+
+
+                }
 			});
 
 
@@ -167,10 +193,67 @@
 						xhr.send(`_id=${data._id}`);
 					});
 				} else if (obj.event === 'edit') {
-					layer.alert('编辑行：<br>' + JSON.stringify(data))
-					console.log(data._id);
-					window.location.href = `./adduser.html?type=edit&id=${data._id}`;
-				}
+                    var orderState = () => {
+                        var body = document.body;
+                        var div = document.createElement('div');
+                        body.appendChild(div);
+                        div.className = 'state';
+                        var arr1 = ['未付款', '付款成功', '发货', '签收', '完成订单'];
+                        var arr2 = ['nopay', 'paid', 'sendout', 'signin', 'completeorder'];
+
+                        var html = '';
+                        for(var i = 0; i < arr1.length; i++) {
+                            html += `
+                                <p>
+                                    <input type="radio" value="orderstate" name="stateradio" id="${arr2[i]}"/>
+                                    <label for="${arr2[i]}">${arr1[i]}</label>
+                                </p>
+                            `;
+                        }
+                        html += `<input type="button" id="statebtn" value="确定">`;
+
+                        div.innerHTML = html;
+
+                        var stateBtn = document.getElementById('statebtn');
+                        var aInputs = div.getElementsByTagName('input');
+                        aInputs[0].checked = true;
+
+                        var state = null;
+
+                        stateBtn.onclick = () => {
+                            for(var i = 0; i < aInputs.length; i++) {
+                                if(aInputs[i].checked) {
+                                    state = aInputs[i].nextElementSibling.innerHTML;
+                                }
+                            }
+
+                            
+                            // var orderstatehtml = this.parentNode.parentNode.previousElementSibling.children[0];
+                            // console.log(orderstatehtml);
+                            // orderstatehtml.innerHTML = state;
+
+                            
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('post', '/order', true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.onload = () => {
+                                if(xhr.status == 200) {
+                                    // var str = xhr.responseText;
+                                    // console.log(str);
+                                    body.removeChild(div);
+                                    location.reload();
+                                }
+                            }
+                            xhr.send(`method=update&_id=${data._id}&orderstate=${state}`);
+                        }
+
+                    }
+					// layer.alert('编辑行：<br>' + JSON.stringify(data))
+					// console.log(data._id);
+                    // window.location.href = `./adduser.html?type=edit&id=${data._id}`;
+                }
+                orderState();
 			});
 
 		});

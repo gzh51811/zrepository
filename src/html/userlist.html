@@ -106,8 +106,10 @@
 				elem: '#userlist'
 				, url: '/user'
 				, toolbar: '#toolbarDemo'
+                , defaultToolbar: ['']
 				, title: '用户数据表'
-				, totalRow: true
+				, totalRow: false
+				, page: false
 				, cols: [[
 					  { type: 'checkbox', fixed: 'left' }
 					, { field: 'username', title: '用户名', width: 120, }
@@ -117,7 +119,6 @@
 					, { field: 'phone', title: '手机', width: 180}
 					, { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
 				]]
-				, page: true
 			});
 
 
