@@ -8,7 +8,7 @@ router.post('/',async (ctx,next)=>{
     let data = ctx.request.body;
     // console.log(data);
 
-    ctx.body = 200;
+    // ctx.body = 200;
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 
 async function connect() {
     let client = await mongodb.MongoClient.connect('mongodb://localhost:27017');
-    let db = client.db('syz');
+    let db = client.db('zhang');
     return {client, db};
 }
 
@@ -51,18 +51,5 @@ exports.update = async (colName, data, newData) => {
     let res = await collection.updateMany(data, newData);
     client.close();
 
-<<<<<<< HEAD
-}
-
-exports.delete = async (colName,query)=>{
-
-    let {db,client} = await connect();
-
-    let collection = db.collection(colName);
-    let res = await collection['deleteMany'](query);
-    client.close();
-
-=======
->>>>>>> 6048de1727f93530f5fc40782836461c0e7cb7c8
     return res;
 }
