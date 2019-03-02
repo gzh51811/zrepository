@@ -10,7 +10,7 @@ router.post('/', async (ctx, next) => {
     
     // console.log(ctx.request.body);
 
-    let {username, password} = ctx.request.body;
+    let {login: username, pwd: password} = ctx.request.body;
     
     let res = await db.find('admin', {username, password});
 
