@@ -14,16 +14,19 @@ const path = require('path');
 router.post('/', async (ctx)=>{
     // console.log(ctx.request.files)
     const file = ctx.request.files.file;    // 获取上传文件
-    console.log(file);
+    // console.log(file);
     const reader = fs.createReadStream(file.path);    // 创建可读流
-    console.log(file.path);
     
     const ext = file.name.split('.').pop();        // 获取上传文件扩展名
-    
-    console.log(file.path)
-    const upStream = fs.createWriteStream(`upload/${Date.now()}.${ext}`);        // 创建可写流
+    let name = `upload/${Date.now()}.${ext}`
+    const upStream = fs.createWriteStream(name);        // 创建可写流
+    // console.log(name);
     reader.pipe(upStream);    // 可读流通过管道写入可写流
-    return ctx.body = '上传成功';
+    return ctx.body = {
+        code:0,
+        src:name
+    };
+    
 })
 
     

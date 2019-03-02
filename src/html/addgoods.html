@@ -34,7 +34,7 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">商品列表</a></dd>
+            <dd><a href="list.html">商品列表</a></dd>
             <dd><a href="javascript:;">商品分类</a></dd>
             <dd><a href="javascript:;">添加商品</a></dd>
           </dl>
@@ -62,17 +62,17 @@
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
         <div style="margin-left:15%;width: 70%;margin-top: 30px">
-            <form class="layui-form">
+            <form class="layui-form" id="form1">
             <div class="layui-form-item">
                 <label class="layui-form-label">商品名称</label>
                 <div class="layui-input-block">
-                  <input type="text" name="goodsname" lay-verify="title" autocomplete="off" placeholder="请输入商品名称" class="layui-input">
+                  <input type="text" name="goodsname" lay-verify="title" autocomplete="off" placeholder="请输入商品名称" class="layui-input layui-form" lay-filter="zidingyi" id="goodsname">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">商品副标题</label>
                 <div class="layui-input-block">
-                  <input type="text" name="fubiaoti" lay-verify="title" autocomplete="off" placeholder="请输入副标题" class="layui-input">
+                  <input type="text" id="fubiaoti" name="fubiaoti" lay-verify="title" autocomplete="off" placeholder="请输入副标题" class="layui-input">
                 </div>
             </div>
 
@@ -81,13 +81,13 @@
             <div class="layui-form-item layui-inline">
                 <label class="layui-form-label">商品价格</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="oldprice" lay-verify="required" placeholder="请输入商品价格" autocomplete="off" class="layui-input">
+                  <input type="text" id="oldprice" name="oldprice" lay-verify="required" placeholder="请输入商品价格" autocomplete="off" class="layui-input">
                 </div>
               </div>
             <div class="layui-form-item layui-inline">
                 <label class="layui-form-label">销售价格</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="nowprice" lay-verify="required" placeholder="请输入销售价格" autocomplete="off" class="layui-input">
+                  <input type="text" id="nowprice" name="nowprice" lay-verify="required" placeholder="请输入销售价格" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">商品类别</label>
                 <div class="layui-input-block">
-                  <select name="sort" lay-filter="aihao">
+                  <select name="sort" lay-filter="aihao" id="sort">
                     <option value=""></option>
                     <option value="0" selected="">手机</option>
                     <option value="1">电脑</option>
@@ -107,15 +107,7 @@
               </div>
             
 
-            <!-- 图片上传 -->
-            <!-- <div class="layui-upload">
-                <label class="layui-form-label">上传图片</label>
-              <button type="button" class="layui-btn" id="shangchuan">选择图片</button>
-              <div class="layui-upload-list">
-                <img class="layui-upload-img" id="demo1">
-                <p id="demoText"></p>
-              </div>
-            </div>    -->
+      
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -124,8 +116,16 @@
                     </button>
                     <br><br>
                     <div style="width:150px;height:150px;border:3px solid #0099CC;border-radius: 5px;padding: 3px;">
-                        <img style="max-width: 150px;max-height:150px;" id="preview">
+                        <img style="max-width: 150px;max-height:150px;" id="preview" data-src="">
                     </div>
+                   <div style="margin-top:15px">
+                    <button type="button" class="layui-btn" id="starupload">
+                      <i class="layui-icon">&#xe67c;</i>开始上传
+                  </button>
+                  <button type="button" class="layui-btn layui-btn-disabled" id="finish" style="display:none">
+                    <i class="layui-icon">&#xe67c;</i>上传完成
+                </button>
+                   </div>
                 </div>
             </div>
 
@@ -136,7 +136,7 @@
             <div class="layui-form-item" style="margin-top:15px">
                 <label class="layui-form-label">库存</label>
                 <div class="layui-input-inline">
-                  <input type="text" name="kucun" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                  <input type="text" id="inventory" name="inventory" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -151,14 +151,14 @@
             <!-- 商品状态 -->
             <div class="layui-form-item">
             <label class="layui-form-label">商品状态</label>
-            <input type="checkbox" name="state" lay-skin="switch" lay-text="上架|下架">
+            <input type="checkbox" id="state" name="state" lay-skin="switch" lay-text="上架|下架">
             </div>
 
             <!-- 商品描述 -->
             <div class="layui-form-item">
                 <label class="layui-form-label">商品描述</label>
                 <div class="layui-inline" style="width:500px">
-                  <textarea name="miaoshu" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
+                  <textarea name="miaoshu" id="miaoshu" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
                 </div>
             </div>
 
@@ -184,6 +184,123 @@
 <script src="../assets/layui/layui.js"></script>
 <script>
 //JavaScript代码区域
+
+  // console.log(form)
+if(location.search){
+  let str = location.search.slice(1);
+  let arr = str.split('=');
+  let id = arr[1];
+  
+  // ajax请求
+  let xhr = new XMLHttpRequest();
+  xhr.open('get','/addgoods?id='+id,true);
+  xhr.send();
+  xhr.onload =()=>{
+    if(xhr.status == 200){
+      let res = JSON.parse(xhr.responseText);
+      // console.log(res);
+      let data = res[0];
+
+      $('#goodsname').val(data.goodsname);
+      $('#fubiaoti').val(data.fubiaoti);
+      $('#oldprice').val(data.oldprice);
+      $('#nowprice').val(data.nowprice);
+      var aa = 0;
+      console.log(data.sort);
+      if(data.sort == "手机"){
+          aa = 0;
+        }else if(data.sort == "电脑"){
+          aa = 1;
+        }else if(data.sort == "平板"){
+          aa = 2;
+        }else if(data.sort == "配件"){
+          aa = 3;
+          console.log(1)
+        }else if(data.sort == "其它"){
+          aa = 4;
+        }
+        console.log(aa);
+      $('.layui-unselect').val(data.sort);
+      $('#sort').val(aa);
+      $('#inventory').val(data.inventory);
+        if(data.state == "上架"){
+          $('#state').next('div').attr('class', 'layui-unselect layui-form-switch layui-form-onswitch');
+          $('#state').next('div').children('em').html('上架')
+          console.log( $('#state'))
+        }else if(data.state == "下架"){
+          $('#state').next('div').attr('class', 'layui-unselect layui-form-switch');
+          $('#state').next('div').children('em').html('下架')
+          console.log( $('#state'))
+        }
+        $('#miaoshu').val(data.miaoshu); 
+        $('#preview').prop('src','../'+data.file)
+
+
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// 图片上传
+layui.use(['form', 'layer', 'upload'], function () {
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $ = layui.jquery;
+        var form = layui.form;
+
+        upload.render({
+            elem: '#upload',
+            url: '/upload',
+            auto: false,//选择文件后不自动上传
+            bindAction: '#starupload',
+            field:'file',
+            data:{time:Date.now()},
+            //上传前的回调
+            before: function () {
+                this.data = {
+                    name: $('input[name="name"]').val()
+                }
+            },
+            //选择文件后的回调
+            choose: function (obj) {
+                obj.preview(function (index, file, result) {
+                    $('#preview').attr('src', result);
+                })
+            },
+            //操作成功的回调
+            done: function (res, index, upload) {
+                var code = res.code === 0 ? 1 : 2;
+                // console.log(res.src)
+                $('#preview').attr('data-src',res.src);
+                // layer.alert(res.msg, {icon: code}, function () {
+                //     // parent.window.location.reload();
+                   
+                // })
+            },
+            //上传错误回调
+            error: function (index, upload) {
+                layer.alert('上传失败！' + index);
+            }
+        });
+    });
+
+
+$('#starupload').click(function(){
+  $('#starupload').css('display','none');
+  $('#finish').css({'display':'block','margin-left':0});
+});
+
+
 layui.use('element', function(){
     var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
   
@@ -194,7 +311,7 @@ layui.use('element', function(){
   });
 });
 
-layui.use('form', function(){
+layui.use(['form', 'layer', 'upload'], function(){
   var form = layui.form;
   
   //监听提交
@@ -212,19 +329,22 @@ layui.use('form', function(){
    }else if(res.sort == 2){
      res.sort = "平板";
    }else if(res.sort == 3){
-     res.sort = "其它";
+     res.sort = "配件";
    }else if(res.sort == 4){
-     res.sort = "配置";
+     res.sort = "其它";
    }
+   console.log($('#preview').attr('data-src'));
+   res.file = $('#preview').attr('data-src');
 
-    console.log(res.sort)
+    // console.log(res.sort)
   //  向后台发送请求
   $.ajax({
         type:'post',
         url:'/addgoods',
         data:res,
         success:function(str){
-          console.log('保存成功');
+          
+          location.href = './list.html'
         }
     });
     console.log(res);
@@ -232,48 +352,6 @@ layui.use('form', function(){
     return false;
   });
 });
-
-
-
-// 图片上传
-//普通图片上传
-layui.use(['form', 'layer', 'upload'], function () {
-        var layer = layui.layer;
-        var upload = layui.upload;
-        var $ = layui.jquery;
-
-        upload.render({
-            elem: '#upload',
-            url: '/upload',
-            auto: false,//选择文件后不自动上传
-            bindAction: '#baocun',
-            field:'file',
-            //上传前的回调
-            before: function () {
-                this.data = {
-                    name: $('input[name="name"]').val()
-                }
-            },
-            //选择文件后的回调
-            choose: function (obj) {
-                obj.preview(function (index, file, result) {
-                    $('#preview').attr('src', result);
-                })
-            },
-            //操作成功的回调
-            done: function (res, index, upload) {
-                var code = res.code === 0 ? 1 : 2;
-                layer.alert(res.msg, {icon: code}, function () {
-                    parent.window.location.reload();
-                })
-            },
-            //上传错误回调
-            error: function (index, upload) {
-                layer.alert('上传失败！' + index);
-            }
-        });
-    });
-
 
 
 </script>

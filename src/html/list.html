@@ -9,7 +9,6 @@
 </head>
 
 <body class="layui-layout-body">
-<<<<<<< HEAD
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
     <div class="layui-logo">二狗子后台管理系统</div>
@@ -38,7 +37,7 @@
           <dl class="layui-nav-child">
             <dd><a href="javascript:;">商品列表</a></dd>
             <dd><a href="javascript:;">商品分类</a></dd>
-            <dd><a href="javascript:;">添加商品</a></dd>
+            <dd><a href="./addgoods.html">添加商品</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item layui-nav-itemed">
@@ -65,79 +64,20 @@
     <div style="padding: 15px;">
         <table class="layui-hide" id="goodslist" lay-filter="test"></table>
         <script type="text/html" id="toolbarDemo">
-=======
-	<div class="layui-layout layui-layout-admin">
-		<div class="layui-header">
-			<div class="layui-logo">二狗子后台管理系统</div>
-			<!-- 头部区域（可配合layui已有的水平导航） -->
-			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item">
-					<a href="javascript:;">
-						<img src="" class="layui-nav-img">
-						admin
-					</a>
-					<dl class="layui-nav-child">
-						<dd><a href="">基本资料</a></dd>
-						<dd><a href="">安全设置</a></dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item"><a href="">退了</a></li>
-			</ul>
-		</div>
 
-		<div class="layui-side layui-bg-black">
-			<div class="layui-side-scroll">
-				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed">
-						<a class="" href="javascript:;">商品管理</a>
-						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">商品列表</a></dd>
-							<dd><a href="javascript:;">商品分类</a></dd>
-							<dd><a href="javascript:;">添加商品</a></dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item layui-nav-itemed">
-						<a href="javascript:;">用户管理</a>
-						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">用户信息</a></dd>
-							<dd><a href="javascript:;">用户管理</a></dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item layui-nav-itemed">
-						<a href="javascript:;">订单管理</a>
-						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">订单管理</a></dd>
-
-						</dl>
-					</li>
-
-				</ul>
-			</div>
-		</div>
-
-		<div class="layui-body">
-			<!-- 内容主体区域 -->
-			<div style="padding: 15px;">
-				<table class="layui-hide" id="goodslist" lay-filter="test"></table>
-				<script type="text/html" id="toolbarDemo">
->>>>>>> 6048de1727f93530f5fc40782836461c0e7cb7c8
           <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
             <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
             <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
           </div>
         </script>
-<<<<<<< HEAD
+
 <script type="text/html" id="barDemo">
-=======
-				<script type="text/html" id="barDemo">
->>>>>>> 6048de1727f93530f5fc40782836461c0e7cb7c8
+
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-  <a class="layui-btn layui-btn-xs" id="state">上线</a>
 </script>
-<<<<<<< HEAD
+
               
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
  
@@ -236,101 +176,13 @@ layui.use('table', function(){
         
       });
     } else if(obj.event === 'edit'){
-      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+      location.href = './addgoods.html?id='+ data._id;
     }
   });
 
 });
 </script>
-=======
 
-				<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-
-
-
-			</div>
-		</div>
-
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			© 二狗子后台管理系统
-		</div>
-	</div>
-	<script src="../assets/layui/layui.js"></script>
-	<script>
-		//JavaScript代码区域
-		layui.use('element', function () {
-			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
-			//监听导航点击
-			element.on('nav(demo)', function (elem) {
-				//console.log(elem)
-				layer.msg(elem.text());
-
-			});
-		});
-		layui.use('table', function () {
-			var table = layui.table;
-
-			//第一个实例
-			table.render({
-				elem: '#goodslist'
-				, url: '/list'
-				, toolbar: '#toolbarDemo'
-				, title: '用户数据表'
-				, totalRow: true
-				, cols: [[
-					{ type: 'checkbox', fixed: 'left' }
-
-					, { field: 'goodsname', title: '商品名称', width: 120, }
-					, { field: 'sort', title: '分类', width: 150, sort: true }
-					, { field: 'oldprice', title: '价格（原价）', width: 180, sort: true }
-					, { field: 'nowprice', title: '价格（现价）', width: 180, sort: true }
-					, { field: 'inventory', title: '库存', width: 100, sort: true }
-					, { field: 'state', title: '状态', width: 180 }
-					, { field: 'time', title: '添加时间', width: 100 }
-					, { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 200 }
-				]]
-				, page: true
-			});
-
-
-			// 获取选中
-			table.on('toolbar(test)', function (obj) {
-				var checkStatus = table.checkStatus(obj.config.id);
-				switch (obj.event) {
-					case 'getCheckData':
-						var data = checkStatus.data;
-						layer.alert(JSON.stringify(data));
-						break;
-					case 'getCheckLength':
-						var data = checkStatus.data;
-						layer.msg('选中了：' + data.length + ' 个');
-						break;
-					case 'isAll':
-						layer.msg(checkStatus.isAll ? '全选' : '未全选')
-						break;
-				};
-			});
-
-			// 点击删除
-			table.on('tool(test)', function (obj) {
-				var data = obj.data;
-				if (obj.event === 'detail') {
-					layer.msg('ID：' + data.id + ' 的查看操作');
-				} else if (obj.event === 'del') {
-					layer.confirm('真的删除这条信息吗', function (index) {
-						obj.del();
-						layer.close(index);
-					});
-				} else if (obj.event === 'edit') {
-					layer.alert('编辑行：<br>' + JSON.stringify(data))
-				}
-			});
-
-		});
-	</script>
->>>>>>> 6048de1727f93530f5fc40782836461c0e7cb7c8
 </body>
 
 </html>
