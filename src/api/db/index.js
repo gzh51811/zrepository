@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 
 async function connect() {
     let client = await mongodb.MongoClient.connect('mongodb://localhost:27017');
-    let db = client.db('syz');
+    let db = client.db('zhang');
     return {client, db};
 }
 
@@ -51,4 +51,7 @@ exports.update = async (colName, data, newData) => {
     let res = await collection.updateMany(data, newData);
     client.close();
 
+
+    return res;
 }
+

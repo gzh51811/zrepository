@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>添加商品</title>
-  <link rel="stylesheet" href="../assets/layui/css/layui.css">
-  <script src="../assets/jquery-3.0.0.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>添加商品</title>
+	<link rel="stylesheet" href="../assets/layui/css/layui.css">
+	<script src="../assets/jquery-3.0.0.min.js"></script>
 </head>
+
 <body class="layui-layout-body">
+<<<<<<< HEAD
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
     <div class="layui-logo">二狗子后台管理系统</div>
@@ -355,5 +358,293 @@ layui.use(['form', 'layer', 'upload'], function(){
 
 
 </script>
+=======
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">二狗子后台管理系统</div>
+			<!-- 头部区域（可配合layui已有的水平导航） -->
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+						admin
+					</a>
+					<dl class="layui-nav-child">
+						<dd><a href="">基本资料</a></dd>
+						<dd><a href="">安全设置</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item"><a href="">退了</a></li>
+			</ul>
+		</div>
+
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a class="" href="javascript:;">商品管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">商品列表</a></dd>
+							<dd><a href="javascript:;">商品分类</a></dd>
+							<dd><a href="javascript:;">添加商品</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;">用户管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">用户信息</a></dd>
+							<dd><a href="javascript:;">用户管理</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;">订单管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;">订单管理</a></dd>
+
+						</dl>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+		<div class="layui-body">
+			<!-- 内容主体区域 -->
+			<div style="padding: 15px;">
+				<div style="margin-left:15%;width: 70%;margin-top: 30px">
+					<form class="layui-form">
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="goodsname" lay-verify="title" autocomplete="off"
+									placeholder="请输入商品名称" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品副标题</label>
+							<div class="layui-input-block">
+								<input type="text" name="fubiaoti" lay-verify="title" autocomplete="off"
+									placeholder="请输入副标题" class="layui-input">
+							</div>
+						</div>
+
+						<!-- 商品价格 -->
+
+						<div class="layui-form-item layui-inline">
+							<label class="layui-form-label">商品价格</label>
+							<div class="layui-input-inline">
+								<input type="text" name="oldprice" lay-verify="required" placeholder="请输入商品价格"
+									autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item layui-inline">
+							<label class="layui-form-label">销售价格</label>
+							<div class="layui-input-inline">
+								<input type="text" name="nowprice" lay-verify="required" placeholder="请输入销售价格"
+									autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<!-- 商品类别 -->
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品类别</label>
+							<div class="layui-input-block">
+								<select name="sort" lay-filter="aihao">
+									<option value=""></option>
+									<option value="0" selected="">手机</option>
+									<option value="1">电脑</option>
+									<option value="2">平板</option>
+									<option value="3">配件</option>
+									<option value="4">其它</option>
+								</select>
+							</div>
+						</div>
+
+
+						<!-- 图片上传 -->
+						<!-- <div class="layui-upload">
+								<label class="layui-form-label">上传图片</label>
+							<button type="button" class="layui-btn" id="shangchuan">选择图片</button>
+							<div class="layui-upload-list">
+								<img class="layui-upload-img" id="demo1">
+								<p id="demoText"></p>
+							</div>
+							</div>    -->
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button type="button" class="layui-btn" id="upload">
+									<i class="layui-icon">&#xe67c;</i>上传图标
+								</button>
+								<br><br>
+								<div
+									style="width:150px;height:150px;border:3px solid #0099CC;border-radius: 5px;padding: 3px;">
+									<img style="max-width: 150px;max-height:150px;" id="preview">
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<!-- 库存 -->
+						<div class="layui-form-item" style="margin-top:15px">
+							<label class="layui-form-label">库存</label>
+							<div class="layui-input-inline">
+								<input type="text" name="kucun" lay-verify="required" placeholder="请输入"
+									autocomplete="off" class="layui-input">
+							</div>
+						</div>
+
+						<!-- 商品属性 -->
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品属性</label>
+							<input type="checkbox" name="" title="热卖" checked>
+							<input type="checkbox" name="" title="推荐">
+							<input type="checkbox" name="" title="促销">
+						</div>
+
+						<!-- 商品状态 -->
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品状态</label>
+							<input type="checkbox" name="state" lay-skin="switch" lay-text="上架|下架">
+						</div>
+
+						<!-- 商品描述 -->
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品描述</label>
+							<div class="layui-inline" style="width:500px">
+								<textarea name="miaoshu" required lay-verify="required" placeholder="请输入"
+									class="layui-textarea"></textarea>
+							</div>
+						</div>
+
+						<!-- 保存 -->
+						<div class="layui-form-item" style="margin-left:50px">
+							<button class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal" lay-filter="go"
+								lay-submit id="baocun">保存</button>
+						</div>
+					</form>
+
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+		<div class="layui-footer">
+			<!-- 底部固定区域 -->
+			© 二狗子后台管理系统
+		</div>
+	</div>
+	<script src="../assets/layui/layui.js"></script>
+	<script>
+		//JavaScript代码区域
+		layui.use('element', function () {
+			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+			//监听导航点击
+			element.on('nav(demo)', function (elem) {
+				//console.log(elem)
+				layer.msg(elem.text());
+			});
+		});
+
+		layui.use('form', function () {
+			var form = layui.form;
+
+			//监听提交
+			form.on('submit(go)', function (data) {
+				let res = data.field;
+				if (res.state == "on") {
+					res.state = "上架";
+				} else {
+					res.state = "下架";
+				}
+				if (res.sort == 0) {
+					res.sort = "手机";
+				} else if (res.sort == 1) {
+					res.sort = "电脑";
+				} else if (res.sort == 2) {
+					res.sort = "平板";
+				} else if (res.sort == 3) {
+					res.sort = "其它";
+				} else if (res.sort == 4) {
+					res.sort = "配置";
+				}
+
+				// console.log(res.sort)
+				//  向后台发送请求
+				$.ajax({
+					type: 'post',
+					url: '/addgoods',
+					data: res,
+					success: function (str) {
+						console.log('保存成功');
+					}
+				});
+				// console.log(res);
+
+				return false;
+			});
+		});
+
+
+
+		// 图片上传
+		//普通图片上传
+		layui.use(['form', 'layer', 'upload'], function () {
+			var layer = layui.layer;
+			var upload = layui.upload;
+			var $ = layui.jquery;
+
+			upload.render({
+				elem: '#upload',
+				url: '/upload',
+				auto: false,//选择文件后不自动上传
+				bindAction: '#baocun',
+				field: 'images',
+				multiple: true,
+				//上传前的回调
+				// before: function () {
+				// 	this.data = {
+				// 		name: $('input[class="layui-input layui-unselect"]').val()
+				// 	}
+				// 	// console.log(this.data);
+				// },
+				//选择文件后的回调
+				choose: function (obj) {
+					obj.preview(function (index, file, result) {
+						$('#preview').attr('src', result);
+						// console.log(index, file, result);
+					})
+				},
+				//操作成功的回调
+				done: function (res, index, upload) {
+
+					console.log('res', res);
+					console.log('index', index);
+					console.log('upload:', upload);
+					// var code = res.code === 0 ? 1 : 2;
+					// layer.alert(res.msg, { icon: code }, function () {
+					// 	// parent.window.location.reload();
+					// 	console.log(1);
+					// })
+				},
+				//上传错误回调
+				error: function (index, upload) {
+					layer.alert('上传失败！' + index);
+				}
+			});
+		});
+
+
+
+	</script>
+>>>>>>> 07bd2781d3e775d7a255c8f53211f81ef65b904b
 </body>
+
 </html>
