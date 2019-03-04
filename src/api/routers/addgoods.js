@@ -6,16 +6,15 @@ const router = new Router();
 
 router.post('/',async (ctx,next)=>{
     let data = ctx.request.body;
-    console.log(data);
+    // console.log(data);
     let time1 = new Date();
     let year = time1.getFullYear();
     let month = time1.getMonth()+1;
     let day = time1.getDate();
     data.time = `${year}-${month}-${day}`;
-console.log(data);
+    // console.log(data);
 
     let res = await db.insert('goodslist',data);
-
 
     ctx.body = {
         code:200,
