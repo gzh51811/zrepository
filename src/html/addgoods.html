@@ -25,7 +25,7 @@
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退了</a></li>
+      <li class="layui-nav-item"><a href="../index.html">退了</a></li>
     </ul>
   </div>
   
@@ -359,67 +359,4 @@ layui.use(['form', 'layer', 'upload'], function(){
 
 </script>
 
-</body>
-
-		$('#starupload').click(function () {
-			$('#starupload').css('display', 'none');
-			$('#finish').css({ 'display': 'block', 'margin-left': 0 });
-		});
-
-
-		layui.use('element', function () {
-			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
-			//监听导航点击
-			element.on('nav(demo)', function (elem) {
-				//console.log(elem)
-				layer.msg(elem.text());
-			});
-		});
-
-		layui.use(['form', 'layer', 'upload'], function () {
-			var form = layui.form;
-
-			//监听提交
-			form.on('submit(go)', function (data) {
-				let res = data.field;
-				if (res.state == "on") {
-					res.state = "上架";
-				} else {
-					res.state = "下架";
-				}
-				if (res.sort == 0) {
-					res.sort = "手机";
-				} else if (res.sort == 1) {
-					res.sort = "电脑";
-				} else if (res.sort == 2) {
-					res.sort = "平板";
-				} else if (res.sort == 3) {
-					res.sort = "配件";
-				} else if (res.sort == 4) {
-					res.sort = "其它";
-				}
-				// console.log($('#preview').attr('data-src'));
-				res.file = $('#preview').attr('data-src');
-				res.images = images;
-				// console.log(res)
-				// 向后台发送请求
-				$.ajax({
-					type: 'post',
-					url: '/addgoods',
-					data: res,
-					success: function (str) {
-						// location.href = './list.html';
-						// console.log(str.code);
-						if(str.code == 200) {
-							console.log('成功');
-							location.href = './list.html';
-						}
-					}
-				});
-
-				return false;
-			});
-		});
-	</script>
 </body>

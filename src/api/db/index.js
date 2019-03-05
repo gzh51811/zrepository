@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 
 async function connect() {
     let client = await mongodb.MongoClient.connect('mongodb://localhost:27017');
-    let db = client.db('syz');
+    let db = client.db('zhang');
     return {client, db};
 }
 
