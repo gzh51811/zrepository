@@ -10,11 +10,12 @@ const router = new Router();
 // const db = require('../db');
 
 const loginRouter = require('./login');
-const listRouter = require('./list');
+// const listRouter = require('./list');
 const addgoodsRouter = require('./addgoods');
 const uploadRouter = require('./upload');
 const userRouter = require('./user');
 const orderRouter = require('./order');
+const pagesRouter = require('./pages');
 const path = require('path');
 router.use(koaBody({
     // 支持formdata
@@ -42,11 +43,11 @@ router.use(koaBody({
 
 
 router.use('/login', loginRouter.routes());
-router.use('/list', listRouter.routes());
+// router.use('/list', listRouter.routes());
 router.use('/addgoods', addgoodsRouter.routes());
 router.use('/upload', uploadRouter.routes());
 router.use('/user', userRouter.routes());
 router.use('/order', orderRouter.routes());
-
+router.use('/pages', pagesRouter.routes());
 
 module.exports = router;
