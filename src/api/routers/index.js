@@ -16,8 +16,6 @@ const uploadRouter = require('./upload');
 const userRouter = require('./user');
 const orderRouter = require('./order');
 const path = require('path');
-
-
 router.use(koaBody({
     // 支持formdata
     multipart:true,
@@ -49,7 +47,6 @@ router.use('/addgoods', addgoodsRouter.routes());
 router.use('/upload', uploadRouter.routes());
 router.use('/user', userRouter.routes());
 router.use('/order', orderRouter.routes());
-
 
 
 module.exports = router;

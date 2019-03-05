@@ -52,6 +52,15 @@ exports.update = async (colName, data, newData) => {
     client.close();
 
 
+}
+
+exports.delete = async (colName,query)=>{
+
+    let {db,client} = await connect();
+
+    let collection = db.collection(colName);
+    let res = await collection['deleteMany'](query);
+    client.close();
     return res;
 }
 
