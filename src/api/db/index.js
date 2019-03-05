@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 
 async function connect() {
     let client = await mongodb.MongoClient.connect('mongodb://localhost:27017');
-    let db = client.db('zhang');
+    let db = client.db('syz');
     return {client, db};
 }
 
@@ -23,14 +23,19 @@ exports.insert = async (colName, data) => {
     return res;
 }
 
-exports.find = async (colName, data) => {
+exports.find = async (colName, data , page , limit) => {
     let {client, db} = await connect();
     let collection = db.collection(colName);
-    let res = await collection.find(data).toArray();
-
-    client.close();
-
-    return res;
+    if(page && limit){
+        let res = await collection.find(data).skip((page-1)*limit).limit(limit).toArray();
+        client.close();
+        return res;
+    }else{
+        let res = await collection.find(data).toArray();
+        client.close();
+        return res;
+    }
+   
 }
 
 exports.delete = async (colName, data) => {

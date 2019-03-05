@@ -46,22 +46,22 @@
 					<li class="layui-nav-item layui-nav-itemed">
 						<a class="" href="javascript:;">商品管理</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">商品列表</a></dd>
-							<dd><a href="javascript:;">商品分类</a></dd>
-							<dd><a href="javascript:;">添加商品</a></dd>
+							<dd><a href="./list.html">商品列表</a></dd>
+							<dd><a href="javasctript:;">商品分类</a></dd>
+							<dd><a href="./addgoods.html">添加商品</a></dd>
 						</dl>
 					</li>
 					<li class="layui-nav-item layui-nav-itemed">
 						<a href="javascript:;">用户管理</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">用户信息</a></dd>
-							<dd><a href="javascript:;">用户管理</a></dd>
+							<dd><a href="./userlist.html">用户信息</a></dd>
+							<dd><a href="./adduser.html">用户管理</a></dd>
 						</dl>
 					</li>
 					<li class="layui-nav-item layui-nav-itemed">
 						<a href="javascript:;">订单管理</a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:;">订单管理</a></dd>
+							<dd><a href="./order.html">订单管理</a></dd>
 
 						</dl>
 					</li>
@@ -276,6 +276,7 @@
 							// console.log(str);
 							if(str.ok) {
 								console.log('插入成功');
+								location.href = './userlist.html';
 							} else {
 								console.log('插入失败');
 							}

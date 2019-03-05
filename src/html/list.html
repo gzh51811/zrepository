@@ -43,14 +43,14 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">用户管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;">用户信息</a></dd>
-            <dd><a href="javascript:;">用户管理</a></dd>
+            <dd><a href="./userlist.html">用户信息</a></dd>
+            <dd><a href="./adduser.html">用户管理</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item layui-nav-itemed">
             <a href="javascript:;">订单管理</a>
             <dl class="layui-nav-child">
-                <dd><a href="javascript:;">订单管理</a></dd>
+                <dd><a href="./order.html">订单管理</a></dd>
                
               </dl>
           </li>
@@ -62,7 +62,9 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-        <table class="layui-hide" id="goodslist" lay-filter="test"></table>
+        <table class="layui-hide" id="goodslist" lay-filter="test">
+          
+        </table>
         <script type="text/html" id="toolbarDemo">
 
           <div class="layui-btn-container">
@@ -110,10 +112,10 @@ layui.use('table', function(){
   //第一个实例
   table.render({
     elem: '#goodslist'
-    ,url:'/list'
+    ,url:'/pages'
     ,toolbar: '#toolbarDemo'
     ,title: '用户数据表'
-    ,totalRow: true
+    ,page: true
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
       
@@ -126,7 +128,7 @@ layui.use('table', function(){
       ,{field:'time', title:'添加时间', width:100}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:200}
     ]]
-    ,page: true
+    
   });
 
 
@@ -181,6 +183,7 @@ layui.use('table', function(){
   });
 
 });
+
 </script>
 
 </body>
